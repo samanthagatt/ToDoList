@@ -9,6 +9,18 @@ import CoreData
 import OSLog
 
 class CoreDataManager {
+    static let shared = CoreDataManager()
+    static let mock: CoreDataManager = {
+        let controller = CoreDataManager(mock: true)
+        let mockToDos = [
+            ToDo(title: "Wash dishes", isComplete: true, context: controller.context),
+            ToDo(title: "Take out trash", context: controller.context),
+            ToDo(title: "Fold laundry", context: controller.context),
+        ]
+        controller.save()
+        return controller
+    }()
+    
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "ToDoList",
         category: String(describing: CoreDataManager.self)
@@ -27,5 +39,15 @@ class CoreDataManager {
             }
         }
         container.viewContext.automaticallyMergesChangesFromParent = true
+    }
+    
+    func save() {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error as NSError {
+                logger.error("Error saving context: \(error), \(error.userInfo)")
+            }
+        }
     }
 }
