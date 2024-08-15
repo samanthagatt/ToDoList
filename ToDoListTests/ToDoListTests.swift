@@ -121,6 +121,25 @@ final class ToDoListTests: XCTestCase {
         XCTAssertFalse(cdManager.context.hasChanges)
         XCTAssertEqual(todo.title, expectedNewTitle)
     }
+    
+    func testToggleCompleteUpdatesToDoAndSavesToCoreData() {
+        // Arrange
+        let expectedOldIsComplete = mockToDoData[0].isComplete
+        let todo = ToDo(
+            id: mockToDoData[0].id,
+            title: mockToDoData[0].title,
+            isComplete: expectedOldIsComplete,
+            dateCreated: mockToDoData[0].dateCreated,
+            context: cdManager.context
+        )
+        
+        // Act
+        sut.toggleComplete(for: todo)
+        
+        // Assert
+        XCTAssertFalse(cdManager.context.hasChanges)
+        XCTAssertEqual(todo.isComplete, !expectedOldIsComplete)
+    }
 }
 
 extension Date {
