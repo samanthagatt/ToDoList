@@ -72,6 +72,55 @@ final class ToDoListTests: XCTestCase {
         let dateCreated = try XCTUnwrap(actual.dateCreated)
         XCTAssertTrue(dateCreated.isBetween(earliestDate, .now))
     }
+    
+    func testUpdateTitleUpdatesTitleButDoesNotSaveToCoreData() {
+        // Arrange
+        let expectedOldTitle = mockToDoData[0].title
+        let todo = ToDo(
+            id: mockToDoData[0].id,
+            title: expectedOldTitle,
+            isComplete: mockToDoData[0].isComplete,
+            dateCreated: mockToDoData[0].dateCreated,
+            context: cdManager.context
+        )
+        let expectedNewTitle = "New title"
+        cdManager.save()
+        
+        // Act
+        sut.onTitleEditingChanged(isEditing: true)
+        sut.updateTitle(for: todo, to: expectedNewTitle)
+        
+        // Assert
+        XCTAssertTrue(cdManager.context.hasChanges)
+        XCTAssertEqual(todo.title, expectedNewTitle)
+        // Discards pending changes
+        cdManager.context.refresh(todo, mergeChanges: false)
+        XCTAssertEqual(todo.title, expectedOldTitle)
+        sut.onTitleEditingChanged(isEditing: false)
+    }
+    
+    func testOnTitleEditingChangedFalseSavesToCoreData() {
+        // Arrange
+        let expectedOldTitle = mockToDoData[0].title
+        let todo = ToDo(
+            id: mockToDoData[0].id,
+            title: expectedOldTitle,
+            isComplete: mockToDoData[0].isComplete,
+            dateCreated: mockToDoData[0].dateCreated,
+            context: cdManager.context
+        )
+        let expectedNewTitle = "New title"
+        cdManager.save()
+        
+        // Act
+        sut.onTitleEditingChanged(isEditing: true)
+        sut.updateTitle(for: todo, to: expectedNewTitle)
+        sut.onTitleEditingChanged(isEditing: false)
+        
+        // Assert
+        XCTAssertFalse(cdManager.context.hasChanges)
+        XCTAssertEqual(todo.title, expectedNewTitle)
+    }
 }
 
 extension Date {
