@@ -24,4 +24,58 @@ final class ToDoListTests: XCTestCase {
         cdManager = CoreDataManager(mock: true)
         sut = ToDoListView.ViewModel(cdManager: cdManager)
     }
+    
+    func testOnAppearLoadsPreviouslyStoredToDos() {
+        // Arrange
+        let expectedToDos = mockToDoData.prefix(3).map {
+            ToDo(
+                id: $0.id,
+                title: $0.title,
+                isComplete: $0.isComplete,
+                dateCreated: $0.dateCreated,
+                context: cdManager.context
+            )
+        }
+        cdManager.save()
+        for expected in expectedToDos {
+            XCTAssertFalse(sut.todos.contains(expected))
+        }
+        XCTAssertEqual(sut.todos.count, 0)
+        
+        // Act
+        sut.onAppear()
+        
+        // Assert
+        XCTAssertEqual(sut.todos.count, expectedToDos.count)
+        for expected in expectedToDos {
+            let actual = sut.todos.first(where: { $0 == expected })
+            XCTAssertNotNil(actual)
+        }
+    }
+    
+    func testAddToDoAddsBlankToDo() throws {
+        // Arrange
+        let earliestDate = Date()
+        XCTAssertTrue(sut.todos.isEmpty)
+        sut.onAppear()
+        
+        // Act
+        sut.addToDo()
+        
+        // Assert
+        XCTAssertFalse(cdManager.context.hasChanges)
+        XCTAssertEqual(sut.todos.count, 1)
+        let actual = try XCTUnwrap(sut.todos.first)
+        XCTAssertNotNil(actual.id)
+        XCTAssertEqual(actual.title, "")
+        XCTAssertEqual(actual.isComplete, false)
+        let dateCreated = try XCTUnwrap(actual.dateCreated)
+        XCTAssertTrue(dateCreated.isBetween(earliestDate, .now))
+    }
+}
+
+extension Date {
+    func isBetween(_ lhs: Date, _ rhs: Date) -> Bool {
+        DateInterval(start: min(lhs, rhs), end: max(lhs, rhs)).contains(self)
+    }
 }
