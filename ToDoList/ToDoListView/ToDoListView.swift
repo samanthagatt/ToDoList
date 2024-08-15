@@ -32,6 +32,7 @@ struct ToDoListView: View {
                     .submitLabel(.done)
                 }
             }
+            .onDelete(perform: viewModel.onDelete(indices:))
         }
         .onAppear(perform: viewModel.onAppear)
         .navigationTitle("To Do List")

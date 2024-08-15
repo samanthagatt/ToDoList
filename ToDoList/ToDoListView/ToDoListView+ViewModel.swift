@@ -78,5 +78,12 @@ extension ToDoListView {
             todo.isComplete.toggle()
             cdManager.save()
         }
+        
+        func onDelete(indices: IndexSet) {
+            for index in indices {
+                cdManager.context.delete(todos[index])
+            }
+            cdManager.save()
+        }
     }
 }
