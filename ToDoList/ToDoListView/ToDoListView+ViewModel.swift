@@ -58,5 +58,20 @@ extension ToDoListView {
                 logger.error("Error fetching ToDos: \(error)")
             }
         }
+        
+        func addToDo() {
+            _ = ToDo(title: "", context: cdManager.context)
+            cdManager.save()
+        }
+        
+        func updateTitle(for todo: ToDo, to newTitle: String) {
+            todo.title = newTitle
+        }
+        
+        func onTitleEditingChanged(isEditing: Bool) {
+            if !isEditing {
+                cdManager.save()
+            }
+        }
     }
 }

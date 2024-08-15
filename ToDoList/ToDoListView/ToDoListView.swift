@@ -13,10 +13,29 @@ struct ToDoListView: View {
     var body: some View {
         List {
             ForEach($viewModel.todos) { $todo in
-                Text(todo.title ?? "")
+                TextField(
+                    "Title",
+                    text: Binding {
+                        todo.title ?? ""
+                    } set: {
+                        viewModel.updateTitle(for: todo, to: $0)
+                    },
+                    onEditingChanged: viewModel.onTitleEditingChanged
+                )
+                .submitLabel(.done)
             }
         }
         .onAppear(perform: viewModel.onAppear)
+        .navigationTitle("To Do List")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.addToDo()
+                } label: {
+                    Label("Add ToDo", systemImage: "plus")
+                }
+            }
+        }
     }
 }
 
