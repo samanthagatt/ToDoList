@@ -9,7 +9,12 @@ import CoreData
 import OSLog
 
 class CoreDataManager {
+    // MARK: - Static Instances
+    /// Live instance of CoreDataManager
     static let shared = CoreDataManager()
+    /// Mock instance of CoreDataManager
+    ///
+    /// Can be used for SwiftUI Previews
     static let mock: CoreDataManager = {
         let controller = CoreDataManager(mock: true)
         let mockToDos = [
@@ -21,6 +26,7 @@ class CoreDataManager {
         return controller
     }()
     
+    // MARK: - Properties
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "ToDoList",
         category: String(reflecting: CoreDataManager.self)
@@ -28,6 +34,7 @@ class CoreDataManager {
     private let container: NSPersistentContainer
     var context: NSManagedObjectContext { container.viewContext }
     
+    // MARK: - Initializers
     init(mock: Bool = false) {
         container = NSPersistentContainer(name: "ToDoList")
         if mock {
@@ -41,6 +48,8 @@ class CoreDataManager {
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
+    // MARK: - Methods
+    /// Saves managed object context if there are any pending changes
     func save() {
         if context.hasChanges {
             do {
