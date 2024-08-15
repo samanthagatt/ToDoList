@@ -1,0 +1,32 @@
+{
+  "configurations" : [
+    {
+      "id" : "D5478B0B-83E9-45CE-B770-9ECA3C85AD9D",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:ToDoList.xcodeproj",
+          "identifier" : "D64FAEDC2C6D0CF300A28658",
+          "name" : "ToDoList"
+        }
+      ]
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:ToDoList.xcodeproj",
+        "identifier" : "D64FAF592C6E961C00A28658",
+        "name" : "ToDoListTests"
+      }
+    }
+  ],
+  "version" : 1
+}

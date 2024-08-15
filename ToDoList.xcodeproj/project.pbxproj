@@ -15,7 +15,18 @@
 		D64FAEF32C6D23B000A28658 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64FAEF22C6D23B000A28658 /* CoreDataManager.swift */; };
 		D64FAF172C6D327300A28658 /* ToDo+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64FAF162C6D327300A28658 /* ToDo+Convenience.swift */; };
 		D64FAF1A2C6D391900A28658 /* ToDoListView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64FAF192C6D391900A28658 /* ToDoListView+ViewModel.swift */; };
+		D64FAF5D2C6E961C00A28658 /* ToDoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64FAF5C2C6E961C00A28658 /* ToDoListTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D64FAF5E2C6E961C00A28658 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D64FAED52C6D0CF300A28658 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D64FAEDC2C6D0CF300A28658;
+			remoteInfo = ToDoList;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D64FAEDD2C6D0CF300A28658 /* ToDoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,10 +38,20 @@
 		D64FAEF22C6D23B000A28658 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		D64FAF162C6D327300A28658 /* ToDo+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDo+Convenience.swift"; sourceTree = "<group>"; };
 		D64FAF192C6D391900A28658 /* ToDoListView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ToDoListView+ViewModel.swift"; sourceTree = "<group>"; };
+		D64FAF5A2C6E961C00A28658 /* ToDoListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D64FAF5C2C6E961C00A28658 /* ToDoListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListTests.swift; sourceTree = "<group>"; };
+		D64FAF652C6E977800A28658 /* ToDoList.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDoList.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D64FAEDA2C6D0CF300A28658 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D64FAF572C6E961C00A28658 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -43,7 +64,9 @@
 		D64FAED42C6D0CF300A28658 = {
 			isa = PBXGroup;
 			children = (
+				D64FAF652C6E977800A28658 /* ToDoList.xctestplan */,
 				D64FAEDF2C6D0CF300A28658 /* ToDoList */,
+				D64FAF5B2C6E961C00A28658 /* ToDoListTests */,
 				D64FAEDE2C6D0CF300A28658 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				D64FAEDD2C6D0CF300A28658 /* ToDoList.app */,
+				D64FAF5A2C6E961C00A28658 /* ToDoListTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,6 +119,14 @@
 			path = ToDoListView;
 			sourceTree = "<group>";
 		};
+		D64FAF5B2C6E961C00A28658 /* ToDoListTests */ = {
+			isa = PBXGroup;
+			children = (
+				D64FAF5C2C6E961C00A28658 /* ToDoListTests.swift */,
+			);
+			path = ToDoListTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -115,6 +147,24 @@
 			productReference = D64FAEDD2C6D0CF300A28658 /* ToDoList.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D64FAF592C6E961C00A28658 /* ToDoListTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D64FAF602C6E961C00A28658 /* Build configuration list for PBXNativeTarget "ToDoListTests" */;
+			buildPhases = (
+				D64FAF562C6E961C00A28658 /* Sources */,
+				D64FAF572C6E961C00A28658 /* Frameworks */,
+				D64FAF582C6E961C00A28658 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D64FAF5F2C6E961C00A28658 /* PBXTargetDependency */,
+			);
+			name = ToDoListTests;
+			productName = ToDoListTests;
+			productReference = D64FAF5A2C6E961C00A28658 /* ToDoListTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -127,6 +177,10 @@
 				TargetAttributes = {
 					D64FAEDC2C6D0CF300A28658 = {
 						CreatedOnToolsVersion = 15.4;
+					};
+					D64FAF592C6E961C00A28658 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = D64FAEDC2C6D0CF300A28658;
 					};
 				};
 			};
@@ -144,6 +198,7 @@
 			projectRoot = "";
 			targets = (
 				D64FAEDC2C6D0CF300A28658 /* ToDoList */,
+				D64FAF592C6E961C00A28658 /* ToDoListTests */,
 			);
 		};
 /* End PBXProject section */
@@ -155,6 +210,13 @@
 			files = (
 				D64FAEE82C6D0CF400A28658 /* Preview Assets.xcassets in Resources */,
 				D64FAEE52C6D0CF400A28658 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D64FAF582C6E961C00A28658 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,7 +236,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D64FAF562C6E961C00A28658 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D64FAF5D2C6E961C00A28658 /* ToDoListTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D64FAF5F2C6E961C00A28658 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D64FAEDC2C6D0CF300A28658 /* ToDoList */;
+			targetProxy = D64FAF5E2C6E961C00A28658 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D64FAEE92C6D0CF400A28658 /* Debug */ = {
@@ -354,6 +432,42 @@
 			};
 			name = Release;
 		};
+		D64FAF612C6E961C00A28658 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84AK8SAYG2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samanthagatt.ToDoListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoList";
+			};
+			name = Debug;
+		};
+		D64FAF622C6E961C00A28658 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 84AK8SAYG2;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.samanthagatt.ToDoListTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToDoList.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ToDoList";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -371,6 +485,15 @@
 			buildConfigurations = (
 				D64FAEEC2C6D0CF400A28658 /* Debug */,
 				D64FAEED2C6D0CF400A28658 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D64FAF602C6E961C00A28658 /* Build configuration list for PBXNativeTarget "ToDoListTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D64FAF612C6E961C00A28658 /* Debug */,
+				D64FAF622C6E961C00A28658 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
