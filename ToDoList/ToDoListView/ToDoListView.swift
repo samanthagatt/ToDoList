@@ -13,16 +13,24 @@ struct ToDoListView: View {
     var body: some View {
         List {
             ForEach($viewModel.todos) { $todo in
-                TextField(
-                    "Title",
-                    text: Binding {
-                        todo.title ?? ""
-                    } set: {
-                        viewModel.updateTitle(for: todo, to: $0)
-                    },
-                    onEditingChanged: viewModel.onTitleEditingChanged
-                )
-                .submitLabel(.done)
+                HStack {
+                    Button {
+                        viewModel.toggleComplete(for: todo)
+                    } label: {
+                        Image(systemName: todo.isComplete ? "largecircle.fill.circle" : "circle")
+                    }
+                    .tint(.brown)
+                    TextField(
+                        "Title",
+                        text: Binding {
+                            todo.title ?? ""
+                        } set: {
+                            viewModel.updateTitle(for: todo, to: $0)
+                        },
+                        onEditingChanged: viewModel.onTitleEditingChanged
+                    )
+                    .submitLabel(.done)
+                }
             }
         }
         .onAppear(perform: viewModel.onAppear)

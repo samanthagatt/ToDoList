@@ -73,5 +73,10 @@ extension ToDoListView {
                 cdManager.save()
             }
         }
+        
+        func toggleComplete(for todo: ToDo) {
+            todo.isComplete.toggle()
+            cdManager.save()
+        }
     }
 }
