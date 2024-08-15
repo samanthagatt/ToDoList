@@ -12,10 +12,9 @@ class CoreDataManager {
     // MARK: - Static Instances
     /// Live instance of CoreDataManager
     static let shared = CoreDataManager()
-    /// Mock instance of CoreDataManager
-    ///
-    /// Can be used for SwiftUI Previews
-    static let mock: CoreDataManager = {
+    #if DEBUG
+    /// Mock instance of CoreDataManager for ease of use in SwiftUI Previews
+    static let previews: CoreDataManager = {
         let controller = CoreDataManager(mock: true)
         let mockToDos = [
             ToDo(title: "Wash dishes", isComplete: true, context: controller.context),
@@ -25,6 +24,7 @@ class CoreDataManager {
         controller.save()
         return controller
     }()
+    #endif
     
     // MARK: - Properties
     private let logger = Logger(
@@ -38,6 +38,7 @@ class CoreDataManager {
     init(mock: Bool = false) {
         container = NSPersistentContainer(name: "ToDoList")
         if mock {
+            // Use in memory storage
             container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
         }
         container.loadPersistentStores { [weak self] _, error in

@@ -14,12 +14,11 @@ struct ToDoListView: View {
         List {
             ForEach($viewModel.todos) { $todo in
                 HStack {
-                    Button {
-                        viewModel.toggleComplete(for: todo)
-                    } label: {
-                        Image(systemName: todo.isComplete ? "largecircle.fill.circle" : "circle")
-                    }
-                    .tint(.brown)
+                    Image(systemName: todo.isComplete ? "largecircle.fill.circle" : "circle")
+                        .onTapGesture {
+                            viewModel.toggleComplete(for: todo)
+                        }
+                        .foregroundColor(.brown)
                     TextField(
                         "Title",
                         text: Binding {
@@ -37,6 +36,9 @@ struct ToDoListView: View {
         .onAppear(perform: viewModel.onAppear)
         .navigationTitle("To Do List")
         .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                EditButton()
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
                     viewModel.addToDo()
@@ -48,8 +50,10 @@ struct ToDoListView: View {
     }
 }
 
+#if DEBUG
 #Preview {
     NavigationStack {
-        ToDoListView(viewModel: ToDoListView.ViewModel(cdManager: .mock))
+        ToDoListView(viewModel: ToDoListView.ViewModel(cdManager: .previews))
     }
 }
+#endif
