@@ -11,18 +11,17 @@ struct ToDoListView: View {
     @StateObject var viewModel = ViewModel()
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List {
+            ForEach($viewModel.todos) { $todo in
+                Text(todo.title ?? "")
+            }
         }
-        .padding()
+        .onAppear(perform: viewModel.onAppear)
     }
 }
 
 #Preview {
     NavigationStack {
-        ToDoListView()
+        ToDoListView(viewModel: ToDoListView.ViewModel(cdManager: .mock))
     }
 }

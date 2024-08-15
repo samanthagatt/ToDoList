@@ -23,7 +23,7 @@ class CoreDataManager {
     
     private let logger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "ToDoList",
-        category: String(describing: CoreDataManager.self)
+        category: String(reflecting: CoreDataManager.self)
     )
     private let container: NSPersistentContainer
     var context: NSManagedObjectContext { container.viewContext }
