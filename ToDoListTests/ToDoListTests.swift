@@ -140,6 +140,38 @@ final class ToDoListTests: XCTestCase {
         XCTAssertFalse(cdManager.context.hasChanges)
         XCTAssertEqual(todo.isComplete, !expectedOldIsComplete)
     }
+    
+    func testOnDeleteDeletesSpecifiedToDosAndSavesToCoreData() {
+        // Arrange
+        let prefix = 3
+        _ = mockToDoData.map {
+            ToDo(
+                id: $0.id,
+                title: $0.title,
+                isComplete: $0.isComplete,
+                dateCreated: $0.dateCreated,
+                context: cdManager.context
+            )
+        }
+        cdManager.save()
+        sut.onAppear()
+        let allTodos = sut.todos
+        for todo in allTodos.prefix(prefix) {
+            XCTAssertTrue(sut.todos.contains(todo))
+        }
+        
+        // Act
+        sut.onDelete(indices: IndexSet(0..<prefix))
+        
+        // Assert
+        XCTAssertFalse(cdManager.context.hasChanges)
+        for todo in allTodos.prefix(prefix) {
+            XCTAssertFalse(sut.todos.contains(todo))
+        }
+        for todo in allTodos.suffix(allTodos.count - 3) {
+            XCTAssertTrue(sut.todos.contains(todo))
+        }
+    }
 }
 
 extension Date {

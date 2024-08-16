@@ -16,7 +16,13 @@ extension ToDo {
         dateCreated: Date = .now,
         context: NSManagedObjectContext
     ) {
-        self.init(context: context)
+        self.init(
+            entity: NSEntityDescription.entity(
+                forEntityName: String(describing: type(of: self)),
+                in: context
+            ) ?? NSEntityDescription(),
+            insertInto: context
+        )
         self.id = id
         self.title = title
         self.isComplete = isComplete
