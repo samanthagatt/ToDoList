@@ -21,11 +21,7 @@ struct ToDoListView: View {
                         .foregroundColor(.brown)
                     TextField(
                         "Title",
-                        text: Binding {
-                            todo.title ?? ""
-                        } set: {
-                            viewModel.updateTitle(for: todo, to: $0)
-                        },
+                        text: $todo.title.with(default: ""),
                         onEditingChanged: viewModel.onTitleEditingChanged
                     )
                     .submitLabel(.done)

@@ -77,11 +77,6 @@ extension ToDoListView {
             cdManager.save()
         }
         
-        /// Updates the title for the specified ToDo
-        func updateTitle(for todo: ToDo, to newTitle: String) {
-            todo.title = newTitle
-        }
-        
         /// onEditingChanged for ToDo title TextField
         ///
         /// Makes sure the changes are saved in CoreData when the user ends editing

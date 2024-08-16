@@ -73,7 +73,11 @@ final class ToDoListTests: XCTestCase {
         XCTAssertTrue(dateCreated.isBetween(earliestDate, .now))
     }
     
-    func testUpdateTitleUpdatesTitleButDoesNotSaveToCoreData() {
+    // Switched from method on the ViewModel in the Binding setter
+    // to using the binding provided in the ForEach with a default value
+    // so this test's a bit obsolete now but keeping it for reference
+    // since underlying functionality is the same
+    func testUpdatingTitleWithoutEditingChangeDoesNotSaveToCoreData() {
         // Arrange
         let expectedOldTitle = mockToDoData[0].title
         let todo = ToDo(
@@ -88,7 +92,7 @@ final class ToDoListTests: XCTestCase {
         
         // Act
         sut.onTitleEditingChanged(isEditing: true)
-        sut.updateTitle(for: todo, to: expectedNewTitle)
+        todo.title = expectedNewTitle
         
         // Assert
         XCTAssertTrue(cdManager.context.hasChanges)
@@ -114,7 +118,7 @@ final class ToDoListTests: XCTestCase {
         
         // Act
         sut.onTitleEditingChanged(isEditing: true)
-        sut.updateTitle(for: todo, to: expectedNewTitle)
+        todo.title = expectedNewTitle
         sut.onTitleEditingChanged(isEditing: false)
         
         // Assert
@@ -171,11 +175,5 @@ final class ToDoListTests: XCTestCase {
         for todo in allTodos.suffix(allTodos.count - 3) {
             XCTAssertTrue(sut.todos.contains(todo))
         }
-    }
-}
-
-extension Date {
-    func isBetween(_ lhs: Date, _ rhs: Date) -> Bool {
-        DateInterval(start: min(lhs, rhs), end: max(lhs, rhs)).contains(self)
     }
 }
